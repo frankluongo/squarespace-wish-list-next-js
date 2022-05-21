@@ -1,23 +1,14 @@
 import dbConnect from '#lib/dbConnect';
 import User from '#models/User';
+import apiErrorHandler from '#utils/apiErrorHandler';
 
 dbConnect();
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(500).json({
-      error: 'Please send a POST request',
-      status: 'failure',
-    });
-  }
-  if (typeof req.body !== 'object' || !req.body.userId) {
-    return res.status(500).json({
-      error: 'Please send a User ID',
-      status: 'failure',
-    });
-  }
+  apiErrorHandler(req, res);
   try {
     const user = await new User({ userId: req.body.userId });
+    await user.save();
     res.status(200).json({
       error: null,
       status: 'success',

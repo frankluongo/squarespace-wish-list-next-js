@@ -8,14 +8,16 @@ const userSchema = new Schema({
   },
   products: [
     {
+      assetUrl: String,
+      excerpt: String,
+      fullUrl: String,
+      price: Number,
       productId: {
         type: String,
         unique: true,
       },
       quantity: Number,
-      excerpt: String,
-      assetUrl: String,
-      fullUrl: String,
+      title: String,
     },
   ],
 });

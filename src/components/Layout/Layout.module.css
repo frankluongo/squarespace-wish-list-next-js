@@ -1,0 +1,11 @@
+.Content {
+  padding: 30px;
+}
+
+.Footer {
+  padding: 30px;
+
+  text-align: center;
+
+  border-top: 1px solid #eee;
+}

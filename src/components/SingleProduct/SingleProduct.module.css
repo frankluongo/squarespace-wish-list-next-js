@@ -1,0 +1,10 @@
+.Product {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 1fr 2fr;
+}
+
+.Product img {
+  display: block;
+  max-width: 100%;
+}

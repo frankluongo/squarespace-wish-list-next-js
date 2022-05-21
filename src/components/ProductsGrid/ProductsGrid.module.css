@@ -1,0 +1,48 @@
+.Grid {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.GridItem {
+  position: relative;
+
+  padding-top: 125%;
+
+  color: #333;
+  text-decoration: none;
+}
+
+.GridItem img {
+  inset: 0;
+  position: absolute;
+
+  display: block;
+  height: 100%;
+  width: 100%;
+
+  object-fit: cover;
+}
+
+.GridItem section {
+  inset: 0;
+  position: absolute;
+
+  height: 100%;
+  width: 100%;
+
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
+}
+
+.GridItem:hover section,
+.GridItem:focus section {
+  opacity: 1;
+}

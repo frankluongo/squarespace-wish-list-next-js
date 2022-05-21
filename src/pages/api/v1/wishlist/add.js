@@ -1,28 +1,20 @@
 import dbConnect from '#lib/dbConnect';
 import User from '#models/User';
+import apiErrorHandler from '#utils/apiErrorHandler';
 
 dbConnect();
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(500).json({
-      error: 'Please send a POST request',
-      status: 'failure',
-    });
-  }
-  if (typeof req.body !== 'object' || !req.body.userId) {
-    return res.status(500).json({
-      error: 'Please send a User ID',
-      status: 'failure',
-    });
-  }
+  apiErrorHandler(req, res);
   try {
-    const user = await User.find({ userId: req.body.userId });
-    const products = [...user.products, ...req.body.products];
+    const user = await User.findOne({ userId: req.body.userId });
+    const products = checkProducts(user.products, req.body.product);
     const newUser = await User.findOneAndUpdate(
       { userId: req.body.userId },
-      { products }
+      { products },
+      { new: true }
     );
+    newUser.save();
     res.status(200).json({
       error: null,
       status: 'success',
@@ -34,4 +26,10 @@ export default async function handler(req, res) {
       status: 'failure',
     });
   }
+}
+
+function checkProducts(products, newProduct) {
+  if (products.find((item) => item.productId === newProduct.productId))
+    return products;
+  return [...products, newProduct];
 }

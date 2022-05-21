@@ -1,0 +1,17 @@
+.WishList {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(4, 1fr);
+  padding-top: 30px;
+}
+
+.WishListItem {
+  padding: 30px;
+
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.WishListItem img {
+  max-width: 100%;
+}
